@@ -46,7 +46,7 @@ const MusicCursor = () => {
   return (
     <div id="music-cursor" ref={ref} aria-hidden="true">
       {/* Music note SVG */}
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M20 3v12.17A4 4 0 1 0 22 19V7h-2.5l.5-.83V3h-2zM8 5v11.17A4 4 0 1 0 10 20V9h6V5H8z"/>
       </svg>
     </div>
