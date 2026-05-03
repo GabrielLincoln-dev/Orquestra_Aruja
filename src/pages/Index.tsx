@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MusicCursor from "@/components/MusicCursor";
 import CookieConsent from "@/components/CookieConsent";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
-import { Facebook, Instagram, MessageCircle, Mail, Phone, MapPin, Menu, X, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, MessageCircle, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 
 const LOGO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp_Image_2025-10-13_at_15.21.50-removebg-preview-150x150.png";
 const HERO_IMG = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-15-at-15.09.43-1024x575.jpeg";
@@ -30,28 +30,10 @@ const GALLERY = [
   "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-3-768x1024.jpeg",
 ];
 
-const BLOG = [
-  {
-    title: "Master Class de Regência Orquestral",
-    date: "11 de novembro de 2025",
-    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.25.41-300x181.jpeg",
-    excerpt: "Primeira Master Class de Regência Orquestral – Orquestra Experimental Arujaense. No dia 25 de outubro de 2025...",
-    href: "https://sinfonicaaruja.free.nf/2025/11/11/master-class-regencial/",
-  },
-  {
-    title: "Ensaio aberto Parque da Cidade Natureza",
-    date: "11 de novembro de 2025",
-    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.31.51-300x169.jpeg",
-    excerpt: "Orquestra Experimental Arujaense realiza sua primeira atividade pública no Parque da Cidade...",
-    href: "https://sinfonicaaruja.free.nf/2025/11/11/ensaio-aberto/",
-  },
-];
-
 const NAV = [
   { label: "Orquestra Experimental", href: "#orquestra" },
   { label: "Sarau de Música de Câmara", href: "#sarau" },
   { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Blog", href: "#blog" },
   { label: "Galeria", href: "#galeria" },
 ];
 
@@ -275,22 +257,54 @@ const Index = () => {
 
         {/* Por que investir */}
         <section className="bg-muted/40 py-16 md:py-24" aria-labelledby="invest-title">
-          <div className="container mx-auto max-w-5xl">
+          <div className="container mx-auto max-w-4xl">
             <SectionTitle id="invest-title">Por que investir?</SectionTitle>
-            <div className="grid gap-6 md:grid-cols-3">
-              {[
-                { n: "R$ 1,59", d: "de retorno para cada R$ 1 investido com a Lei Rouanet (Jornal USP, 2019)." },
-                { n: "R$ 6,51", d: "de retorno para cada R$ 1 da Lei Paulo Gustavo (Ministério da Cultura, 2025)." },
-                { n: "28,5", d: "postos de trabalho gerados a cada R$ 1 milhão produzido pelo setor cultural (FGV)." },
-              ].map((s) => (
-                <div key={s.n} className="rounded-2xl border-l-4 border-secondary bg-card p-6 shadow-soft">
-                  <p className="font-display text-4xl font-bold text-primary">{s.n}</p>
-                  <p className="mt-2 text-muted-foreground">{s.d}</p>
-                </div>
-              ))}
+            <div className="space-y-6 text-muted-foreground leading-relaxed">
+              <p>
+                Para cada R$ 1 investido com a Lei Rouanet, existe R$ 1,59 de retorno, ou seja, 59% de retorno.
+                É alto o payback dos projetos culturais frutos de incentivo fiscal. A lei gerou R$ 31 bilhões
+                em renúncia fiscal, e esses R$ 31 bilhões não só retornaram à economia, como também foram
+                gerados mais R$ 18,56 bilhões. Então, o impacto total da Lei Rouanet desde que ela existe é de R$ 51 bilhões.
+              </p>
+              <p className="text-sm font-semibold text-primary">Fonte: Jornal USP, 2019</p>
+
+              <h3 className="pt-4 text-2xl font-bold text-primary">Lei Paulo Gustavo</h3>
+              <p>
+                Paralelamente, a pesquisa da Fundação Getúlio Vargas (FGV) sobre a Lei Paulo Gustavo (LPG) revela
+                o impacto significativo dessa política no setor cultural. Para cada R$ 1 investido pela lei, o
+                retorno é de R$ 6,51, demonstrando a capacidade do setor cultural e da economia criativa de
+                impulsionar a atividade econômica local. A LPG viabiliza o maior investimento direto no setor
+                cultural da história do Brasil, com R$ 3,9 bilhões destinados a ações e projetos em todo o território nacional.
+              </p>
+              <p className="text-sm font-semibold text-primary">Fonte: Ministério da Cultura, 2025</p>
+
+              <h3 className="pt-4 text-2xl font-bold text-primary">Geração de empregos e renda em toda a cadeia de valor</h3>
+              <p>
+                Segundo a pesquisa elaborada pela Fundação Getulio Vargas, entre 2012 e 2016, os investimentos
+                ao ProAC ICMS movimentaram R$ 715,4 milhões na economia brasileira, com aumento de R$ 360,3
+                milhões no PIB brasileiro. Ao todo, foram gerados mais de quatro mil empregos, correspondentes
+                a 0,4% dos empregos do setor de cultura, esporte e recreação, com retorno de R$ 93,6 milhões
+                para os cofres públicos, via contribuição de impostos.
+              </p>
+              <p>
+                A cada R$ 1 milhão produzido pelo setor de atividades artísticas, criativas e de espetáculos
+                pelo ProAC-SP, são gerados 28,5 postos de trabalho por ano.
+              </p>
+              <p>
+                Dados revelam que, a cada R$ 1 milhão produzido pelo setor de atividades artísticas, criativas
+                e de espetáculos pelo programa, são gerados, por ano, 28,5 postos de trabalho, enquanto nos
+                demais setores de serviços esse número é de apenas 11,8 empregos. Um resultado expressivo que
+                indica que o setor cultural representa um elevado potencial de geração de emprego a nível nacional.
+              </p>
+              <p className="text-sm font-semibold text-primary">Fonte: Numen Produtora – LinkedIn</p>
+
+              <div className="pt-4 text-center">
+                <CTAButton>Venha conhecer nossa Orquestra</CTAButton>
+              </div>
             </div>
           </div>
         </section>
+
 
         {/* Idealizadores */}
         <section className="py-16 md:py-24" aria-labelledby="ideal-title">
@@ -325,33 +339,7 @@ const Index = () => {
             <h2 id="apoia-title" className="mb-8 text-center text-2xl font-bold text-primary">Apoiadores</h2>
             <div className="flex flex-wrap items-center justify-center gap-8">
               {SUPPORTERS.map((s, i) => (
-                <img key={i} src={s} alt={`Logo apoiador ${i + 1}`} className="h-24 w-auto rounded-md object-contain grayscale transition hover:grayscale-0" loading="lazy" />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Blog */}
-        <section id="blog" className="py-16 md:py-24" aria-labelledby="blog-title">
-          <div className="container mx-auto">
-            <SectionTitle id="blog-title">Blog</SectionTitle>
-            <div className="grid gap-8 md:grid-cols-2">
-              {BLOG.map((b) => (
-                <article key={b.title} className="overflow-hidden rounded-2xl bg-card shadow-soft transition hover:-translate-y-1">
-                  <a href={b.href} target="_blank" rel="noopener noreferrer">
-                    <img src={b.img} alt={b.title} className="aspect-video w-full object-cover" loading="lazy" />
-                  </a>
-                  <div className="p-6">
-                    <p className="text-xs uppercase tracking-wider text-muted-foreground">{b.date} | by Gianini</p>
-                    <h3 className="mt-2 text-xl font-bold text-primary">
-                      <a href={b.href} target="_blank" rel="noopener noreferrer" className="hover:underline">{b.title}</a>
-                    </h3>
-                    <p className="mt-3 text-muted-foreground">{b.excerpt}</p>
-                    <a href={b.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 font-semibold text-secondary hover:gap-2 transition-all">
-                      Leia mais <ChevronRight className="h-4 w-4" />
-                    </a>
-                  </div>
-                </article>
+                <img key={i} src={s} alt={`Logo apoiador ${i + 1}`} className="h-24 w-auto rounded-md object-contain transition hover:scale-105" loading="lazy" />
               ))}
             </div>
           </div>
