@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MusicCursor from "@/components/MusicCursor";
 import CookieConsent from "@/components/CookieConsent";
 import AccessibilityWidget from "@/components/AccessibilityWidget";
-import { Facebook, Instagram, MessageCircle, Mail, Phone, MapPin, Menu, X, ChevronRight } from "lucide-react";
+import { Facebook, Instagram, MessageCircle, Mail, Phone, MapPin, Menu, X } from "lucide-react";
 
 const LOGO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp_Image_2025-10-13_at_15.21.50-removebg-preview-150x150.png";
 const HERO_IMG = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-15-at-15.09.43-1024x575.jpeg";
@@ -28,23 +28,6 @@ const GALLERY = [
   "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-16.53.04-768x1024.jpeg",
   "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.52-768x1024.jpeg",
   "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-3-768x1024.jpeg",
-];
-
-const BLOG = [
-  {
-    title: "Master Class de Regência Orquestral",
-    date: "11 de novembro de 2025",
-    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.25.41-300x181.jpeg",
-    excerpt: "Primeira Master Class de Regência Orquestral – Orquestra Experimental Arujaense. No dia 25 de outubro de 2025...",
-    href: "https://sinfonicaaruja.free.nf/2025/11/11/master-class-regencial/",
-  },
-  {
-    title: "Ensaio aberto Parque da Cidade Natureza",
-    date: "11 de novembro de 2025",
-    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.31.51-300x169.jpeg",
-    excerpt: "Orquestra Experimental Arujaense realiza sua primeira atividade pública no Parque da Cidade...",
-    href: "https://sinfonicaaruja.free.nf/2025/11/11/ensaio-aberto/",
-  },
 ];
 
 const NAV = [
