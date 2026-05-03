@@ -1,16 +1,422 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useState } from "react";
+import MusicCursor from "@/components/MusicCursor";
+import CookieConsent from "@/components/CookieConsent";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
+import { Facebook, Instagram, MessageCircle, Mail, Phone, MapPin, Menu, X, ChevronRight } from "lucide-react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const LOGO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp_Image_2025-10-13_at_15.21.50-removebg-preview-150x150.png";
+const HERO_IMG = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-15-at-15.09.43-1024x575.jpeg";
+const OEA_IMG = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.50.43.jpeg";
+const SARAU_IMG = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.18.24-1.jpeg";
+const LUCIA = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-16.53.04.jpeg";
+const LEONARDO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-09-at-23.00.36.jpeg";
+const ISRAEL = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.29.15-1-682x1024.jpeg";
+const ANTONIO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/ChatGPT-Image-21-de-out.-de-2025-15_18_21-1-2-683x1024.png";
+const RODOLFO = "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.16.37.jpeg";
+const WHATSAPP = "https://wa.me/5511941724423?text=quero%20mais%20informa%C3%A7%C3%A3o%20sobre%20a%20orquestra";
+
+const SUPPORTERS = [
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-21-at-19.39.37-rdjyt7qjha1jke9aqyqjomyi1jkqf45r4zfmm80r80.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-06-04-at-12.27.38-rdjytplh34pzozjcuoggi0g9bv4phd4njftuqha9xs.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-10-21-at-19.39.36-rdjyt23ic9ttmqhhnwas9odqh8cj4xjd47ipqk949c.jpeg",
+];
+
+const GALLERY = [
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-2-768x1024.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-1-768x1024.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-768x1024.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-16.53.04-768x1024.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.52-768x1024.jpeg",
+  "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/10/WhatsApp-Image-2025-10-21-at-19.32.50-3-768x1024.jpeg",
+];
+
+const BLOG = [
+  {
+    title: "Master Class de Regência Orquestral",
+    date: "11 de novembro de 2025",
+    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.25.41-300x181.jpeg",
+    excerpt: "Primeira Master Class de Regência Orquestral – Orquestra Experimental Arujaense. No dia 25 de outubro de 2025...",
+    href: "https://sinfonicaaruja.free.nf/2025/11/11/master-class-regencial/",
+  },
+  {
+    title: "Ensaio aberto Parque da Cidade Natureza",
+    date: "11 de novembro de 2025",
+    img: "https://sinfonicaaruja.free.nf/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-04-at-16.31.51-300x169.jpeg",
+    excerpt: "Orquestra Experimental Arujaense realiza sua primeira atividade pública no Parque da Cidade...",
+    href: "https://sinfonicaaruja.free.nf/2025/11/11/ensaio-aberto/",
+  },
+];
+
+const NAV = [
+  { label: "Orquestra Experimental", href: "#orquestra" },
+  { label: "Sarau de Música de Câmara", href: "#sarau" },
+  { label: "Depoimentos", href: "#depoimentos" },
+  { label: "Blog", href: "#blog" },
+  { label: "Galeria", href: "#galeria" },
+];
+
+const CTAButton = ({ children, href = WHATSAPP }: { children: React.ReactNode; href?: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-6 py-3 font-semibold text-white shadow-soft transition-transform hover:scale-105 focus:scale-105"
+  >
+    <MessageCircle className="h-5 w-5" aria-hidden="true" />
+    {children}
+  </a>
+);
+
+const SectionTitle = ({ children, id }: { children: React.ReactNode; id?: string }) => (
+  <h2 id={id} className="mb-8 text-center text-3xl font-bold text-primary md:text-4xl lg:text-5xl">
+    {children}
+  </h2>
+);
+
+const Index = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Orquestra Sinfônica de Arujá";
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <>
+      <a href="#main" className="skip-link">Pular para o conteúdo</a>
+      <MusicCursor />
+
+      {/* Header */}
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur" role="banner">
+        <div className="container mx-auto flex items-center justify-between gap-4 py-3">
+          <a href="#" aria-label="Orquestra Sinfônica de Arujá - Início" className="flex items-center gap-3">
+            <img src={LOGO} alt="Logo Orquestra Sinfônica de Arujá" className="h-14 w-14 rounded-full" />
+            <span className="hidden font-display text-lg font-bold text-primary sm:block">
+              Orquestra Sinfônica<br /><span className="text-sm font-medium text-secondary">de Arujá</span>
+            </span>
+          </a>
+          <nav aria-label="Navegação principal" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {NAV.map((n) => (
+                <li key={n.href}>
+                  <a href={n.href} className="rounded-md px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-muted">
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <button
+            type="button"
+            className="rounded-md p-2 text-primary lg:hidden"
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+        {menuOpen && (
+          <nav aria-label="Navegação móvel" className="border-t border-border lg:hidden">
+            <ul className="container mx-auto flex flex-col py-2">
+              {NAV.map((n) => (
+                <li key={n.href}>
+                  <a
+                    href={n.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded-md px-3 py-3 text-primary hover:bg-muted"
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </header>
+
+      <main id="main">
+        {/* Hero */}
+        <section className="bg-muted/40 py-16 md:py-24" aria-labelledby="hero-title">
+          <div className="container mx-auto grid items-center gap-10 md:grid-cols-2">
+            <div>
+              <h1 id="hero-title" className="text-4xl font-bold leading-tight text-primary md:text-5xl lg:text-6xl">
+                Sinta a energia da música que inspira Arujá
+              </h1>
+              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                Em uma iniciativa inovadora e envolvente, o projeto Orquestra Sinfônica de Arujá (OSA)
+                propõe a criação de grupos musicais que promovem a cultura artística da cidade,
+                a integração da comunidade e a formação profissional de músicos locais.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+                Unimos talentos e amantes da música, incentivando a participação ativa de moradores
+                de Arujá e região e valorizando a rica diversidade cultural brasileira.
+              </p>
+              <div className="mt-8">
+                <CTAButton>Venha conhecer nossa Orquestra</CTAButton>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src={HERO_IMG}
+                alt="Maestro regendo a Orquestra Sinfônica de Arujá - Projeto Peixinhos Musicais"
+                className="w-full rounded-2xl shadow-soft"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Projetos */}
+        <section className="py-16 md:py-24" aria-labelledby="projetos-title">
+          <div className="container mx-auto">
+            <p className="text-center text-sm font-bold uppercase tracking-widest text-secondary">Projetos da orquestra</p>
+            <SectionTitle id="projetos-title">Nossas Iniciativas</SectionTitle>
+
+            <article id="orquestra" className="grid items-center gap-10 md:grid-cols-2">
+              <img src={OEA_IMG} alt="Orquestra Experimental Arujaense em apresentação" className="rounded-2xl shadow-soft" loading="lazy" />
+              <div>
+                <h3 className="text-2xl font-bold text-primary md:text-3xl">Orquestra Experimental Arujaense</h3>
+                <p className="mt-4 text-muted-foreground">
+                  A Orquestra Experimental Arujaense (OEA) é um projeto artístico-pedagógico que integra o
+                  movimento de formação orquestral do Alto Tietê, sob a direção do maestro Israel Cardoso.
+                  Atua como braço formativo da Orquestra Sinfônica de Arujá, oferecendo a jovens músicos
+                  e instrumentistas amadores a vivência prática da música orquestral e camerística.
+                </p>
+                <p className="mt-4 text-muted-foreground">
+                  A OEA promove ensaios tutti, ensaios de naipe, música de câmara e master classes,
+                  com repertório que vai do barroco ao contemporâneo. Realiza apresentações didáticas,
+                  ensaios abertos e concertos em espaços culturais, igrejas e escolas.
+                </p>
+                <ul className="mt-6 space-y-1 text-sm text-primary">
+                  <li><strong>Direção Artística e Regência:</strong> Maestro Israel Cardoso</li>
+                  <li><strong>Coordenação Pedagógica:</strong> Prof. Antonio Beltran</li>
+                  <li><strong>Cidade:</strong> Arujá – São Paulo, Brasil</li>
+                  <li><strong>Redes sociais:</strong> @orquestrasinfonicadearuja</li>
+                </ul>
+              </div>
+            </article>
+
+            <article id="sarau" className="mt-20 grid items-center gap-10 md:grid-cols-2">
+              <div className="md:order-2">
+                <img src={SARAU_IMG} alt="Sarau de Música de Câmara" className="rounded-2xl shadow-soft" loading="lazy" />
+              </div>
+              <div className="md:order-1">
+                <h3 className="text-2xl font-bold text-primary md:text-3xl">Sarau de Música de Câmara</h3>
+                <p className="mt-4 text-muted-foreground">
+                  Iniciativa artística e pedagógica voltada à formação e valorização dos músicos da
+                  comunidade. Os participantes se apresentam em formações camerísticas — duos, trios,
+                  quartetos e quintetos — explorando do popular ao clássico, em ambiente intimista
+                  e inspirador.
+                </p>
+                <p className="mt-4 text-muted-foreground">
+                  Mais do que uma mostra musical, é uma experiência formativa: os participantes
+                  assumem o protagonismo, desenvolvendo escuta, expressão e sensibilidade artística
+                  sob orientação dos professores do projeto.
+                </p>
+                <div className="mt-6">
+                  <CTAButton>Venha conhecer nossa Orquestra</CTAButton>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* Missão Visão Valores */}
+        <section className="bg-gradient-hero py-16 text-primary-foreground md:py-24" aria-labelledby="mvv-title">
+          <div className="container mx-auto">
+            <SectionTitle id="mvv-title">
+              <span className="text-primary-foreground">Missão, Visão e Valores</span>
+            </SectionTitle>
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                { t: "Missão", d: "Promover o desenvolvimento integral de crianças e jovens da região por meio da arte, com foco na criatividade, inclusão e aprendizado colaborativo, fortalecendo a economia criativa local." },
+                { t: "Visão", d: "Criar grupos musicais que promovam a cultura artística da cidade, integrem a comunidade e proporcionem formação profissional de músicos locais, valorizando a diversidade cultural." },
+                { t: "Valores", d: "Criatividade, Educação, Colaboração e Transformação — acreditamos no poder da arte para promover mudanças positivas na vida dos jovens e na sociedade." },
+              ].map((b) => (
+                <div key={b.t} className="rounded-2xl bg-background/10 p-6 backdrop-blur ring-1 ring-background/20">
+                  <h3 className="text-2xl font-bold text-secondary">{b.t}</h3>
+                  <p className="mt-3 leading-relaxed">{b.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Depoimentos */}
+        <section id="depoimentos" className="py-16 md:py-24" aria-labelledby="dep-title">
+          <div className="container mx-auto max-w-5xl">
+            <SectionTitle id="dep-title">Depoimentos</SectionTitle>
+
+            <div className="grid gap-8 md:grid-cols-2">
+              <figure className="rounded-2xl bg-muted/40 p-6 shadow-soft">
+                <img src={LUCIA} alt="Professora Lucia, pianista" className="mb-4 h-24 w-24 rounded-full object-cover" loading="lazy" />
+                <blockquote className="text-lg italic text-foreground">
+                  “Um sonho realizado, pra todo profissional de música participar de uma Orquestra é um ápice!”
+                </blockquote>
+                <figcaption className="mt-4 font-semibold text-primary">Professora Lucia<br /><span className="text-sm font-normal text-muted-foreground">Piano</span></figcaption>
+              </figure>
+
+              <figure className="rounded-2xl bg-muted/40 p-6 shadow-soft">
+                <img src={LEONARDO} alt="Leonardo dos Santos, flautista" className="mb-4 h-24 w-24 rounded-full object-cover" loading="lazy" />
+                <blockquote className="text-foreground">
+                  “Quando vi o edital do projeto da Orquestra Experimental Arujaense, decidi tirar a flauta da aposentadoria.
+                  Pude experimentar o fazer musical, estudar com mais afinco e compartilhar experiências com outros músicos.
+                  Essa iniciativa é inovadora na cidade.”
+                </blockquote>
+                <figcaption className="mt-4 font-semibold text-primary">Leonardo dos Santos<br /><span className="text-sm font-normal text-muted-foreground">Flautista</span></figcaption>
+              </figure>
+            </div>
+
+            <div className="mt-10 text-center">
+              <CTAButton>Venha conhecer nossa Orquestra</CTAButton>
+            </div>
+          </div>
+        </section>
+
+        {/* Por que investir */}
+        <section className="bg-muted/40 py-16 md:py-24" aria-labelledby="invest-title">
+          <div className="container mx-auto max-w-5xl">
+            <SectionTitle id="invest-title">Por que investir?</SectionTitle>
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                { n: "R$ 1,59", d: "de retorno para cada R$ 1 investido com a Lei Rouanet (Jornal USP, 2019)." },
+                { n: "R$ 6,51", d: "de retorno para cada R$ 1 da Lei Paulo Gustavo (Ministério da Cultura, 2025)." },
+                { n: "28,5", d: "postos de trabalho gerados a cada R$ 1 milhão produzido pelo setor cultural (FGV)." },
+              ].map((s) => (
+                <div key={s.n} className="rounded-2xl border-l-4 border-secondary bg-card p-6 shadow-soft">
+                  <p className="font-display text-4xl font-bold text-primary">{s.n}</p>
+                  <p className="mt-2 text-muted-foreground">{s.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Idealizadores */}
+        <section className="py-16 md:py-24" aria-labelledby="ideal-title">
+          <div className="container mx-auto">
+            <SectionTitle id="ideal-title">Idealizadores da Orquestra</SectionTitle>
+
+            <div className="space-y-16">
+              {[
+                { name: "Israel Cardoso", role: "Direção Artística e Regência", img: ISRAEL,
+                  bio: "Regente, educador e músico atuante no cenário artístico no Brasil e no exterior. MBA em Gestão de Projetos (USP), pós-graduado em Regência (FAMOSP), bacharel (FAAM) e licenciado em Música (FZAYN). Vencedor de dois prêmios do Concurso para Regentes da Academia Chnee 2024 — Escolha do Público e Prêmio do Júri." },
+                { name: "Antonio Beltran", role: "Coordenação Pedagógica", img: ANTONIO,
+                  bio: "Natural de Arujá-SP, clarinetista e claronista com sólida formação. Bacharel em Música (Faculdade Cantareira), com especialização na EMESP Tom Jobim e estudos na França com Lilian Hariemsed. Atua como coordenador pedagógico e professor do curso de madeiras na Orquestra Municipal de Santa Isabel." },
+                { name: "Rodolfo Freitas", role: "Spalla / Professor de Cordas", img: RODOLFO,
+                  bio: "Violinista e professor, graduado em Música pela FMU/FIAM-FAAM. Integra o Musykanto Ensemble e atua em projetos camerísticos sob direção de Elina Suris. Professor de Cordas da Orquestra Experimental Arujaense (OEA) e Spalla da Orquestra Sinfônica de Arujá (OSA)." },
+              ].map((p) => (
+                <article key={p.name} className="grid items-start gap-8 md:grid-cols-[300px,1fr]">
+                  <img src={p.img} alt={`Retrato de ${p.name}`} className="w-full rounded-2xl object-cover shadow-soft" loading="lazy" />
+                  <div>
+                    <h3 className="text-2xl font-bold text-primary">{p.name}</h3>
+                    <p className="mt-1 text-secondary font-semibold">{p.role}</p>
+                    <p className="mt-4 leading-relaxed text-muted-foreground">{p.bio}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Apoiadores */}
+        <section className="bg-muted/40 py-12" aria-labelledby="apoia-title">
+          <div className="container mx-auto">
+            <h2 id="apoia-title" className="mb-8 text-center text-2xl font-bold text-primary">Apoiadores</h2>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              {SUPPORTERS.map((s, i) => (
+                <img key={i} src={s} alt={`Logo apoiador ${i + 1}`} className="h-24 w-auto rounded-md object-contain grayscale transition hover:grayscale-0" loading="lazy" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Blog */}
+        <section id="blog" className="py-16 md:py-24" aria-labelledby="blog-title">
+          <div className="container mx-auto">
+            <SectionTitle id="blog-title">Blog</SectionTitle>
+            <div className="grid gap-8 md:grid-cols-2">
+              {BLOG.map((b) => (
+                <article key={b.title} className="overflow-hidden rounded-2xl bg-card shadow-soft transition hover:-translate-y-1">
+                  <a href={b.href} target="_blank" rel="noopener noreferrer">
+                    <img src={b.img} alt={b.title} className="aspect-video w-full object-cover" loading="lazy" />
+                  </a>
+                  <div className="p-6">
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground">{b.date} | by Gianini</p>
+                    <h3 className="mt-2 text-xl font-bold text-primary">
+                      <a href={b.href} target="_blank" rel="noopener noreferrer" className="hover:underline">{b.title}</a>
+                    </h3>
+                    <p className="mt-3 text-muted-foreground">{b.excerpt}</p>
+                    <a href={b.href} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 font-semibold text-secondary hover:gap-2 transition-all">
+                      Leia mais <ChevronRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Galeria */}
+        <section id="galeria" className="bg-muted/40 py-16 md:py-24" aria-labelledby="gal-title">
+          <div className="container mx-auto">
+            <SectionTitle id="gal-title">Galeria da Orquestra</SectionTitle>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {GALLERY.map((g, i) => (
+                <a key={i} href={g} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl shadow-soft">
+                  <img src={g} alt={`Foto da galeria ${i + 1}`} className="aspect-[3/4] w-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-primary text-primary-foreground" role="contentinfo">
+        <div className="container mx-auto py-12">
+          <h2 className="text-center text-2xl font-bold text-secondary md:text-3xl">Venha conhecer mais sobre nossa orquestra!</h2>
+
+          <div className="mt-10 grid gap-10 md:grid-cols-2">
+            <div>
+              <h3 className="text-xl font-bold">Localização e contato</h3>
+              <ul className="mt-4 space-y-3 text-primary-foreground/90">
+                <li className="flex items-start gap-3"><MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-secondary" /><span>CDL Arujá – R. Adhemar de Barros, 95 – Jardim Modelo, Arujá – SP, 07401-290</span></li>
+                <li className="flex items-center gap-3"><Mail className="h-5 w-5 text-secondary" /><a href="mailto:contatoisraelcardoso@gmail.com" className="hover:underline">contatoisraelcardoso@gmail.com</a></li>
+                <li className="flex items-center gap-3"><Phone className="h-5 w-5 text-secondary" /><a href="tel:+5511941724423" className="hover:underline">(11) 94172-4423</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold">Nos siga nas redes sociais</h3>
+              <div className="mt-4 flex gap-3">
+                <a href="https://www.facebook.com/people/Orquestra-Sinf%C3%B4nica-de-Aruj%C3%A1/61577942764525" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Facebook /></a>
+                <a href="https://www.instagram.com/orquestrasinfonicadearuja" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Instagram /></a>
+                <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><MessageCircle /></a>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 border-t border-primary-foreground/20 pt-6 text-center text-sm text-primary-foreground/80">
+            <p>Todos os direitos reservados a Orquestra Sinfônica de Arujá</p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating WhatsApp */}
+      <a
+        href={WHATSAPP}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Fale conosco no WhatsApp"
+        className="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-soft transition-transform hover:scale-110"
+      >
+        <MessageCircle className="h-7 w-7" />
+      </a>
+
+      <AccessibilityWidget />
+      <CookieConsent />
+    </>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
