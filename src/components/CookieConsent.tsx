@@ -38,9 +38,9 @@ const CookieConsent = () => {
         <div className="mt-4 space-y-2 rounded-lg bg-muted/50 p-4 text-sm">
           {([
             { k: "functional", label: "Funcional", desc: "Estritamente necessário.", locked: true },
-            { k: "preferences", label: "Preferências", desc: "Armazenar preferências do usuário." },
-            { k: "statistics", label: "Estatísticas", desc: "Uso anônimo para fins estatísticos." },
-            { k: "marketing", label: "Marketing", desc: "Perfis de usuário para publicidade." },
+            { k: "preferences", label: "Preferências", desc: "Armazenar preferências do usuário.", locked: false },
+            { k: "statistics", label: "Estatísticas", desc: "Uso anônimo para fins estatísticos.", locked: false },
+            { k: "marketing", label: "Marketing", desc: "Perfis de usuário para publicidade.", locked: false },
           ] as const).map((c) => (
             <label key={c.k} className="flex items-start justify-between gap-3 py-1">
               <span>
