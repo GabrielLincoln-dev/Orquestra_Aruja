@@ -376,10 +376,10 @@ const Index = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold">Nos siga nas redes sociais</h3>
-              <div className="mt-4 flex gap-3">
-                <a href="https://www.facebook.com/people/Orquestra-Sinf%C3%B4nica-de-Aruj%C3%A1/61577942764525" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Facebook /></a>
-                <a href="https://www.instagram.com/orquestrasinfonicadearuja" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Instagram /></a>
-                <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><MessageCircle /></a>
+              <div className="relative z-10 mt-4 flex gap-3">
+                <a href="https://www.facebook.com/people/Orquestra-Sinf%C3%B4nica-de-Aruj%C3%A1/61577942764525" target="_blank" rel="noopener noreferrer" aria-label="Facebook" onClick={(e) => { e.preventDefault(); window.open("https://www.facebook.com/people/Orquestra-Sinf%C3%B4nica-de-Aruj%C3%A1/61577942764525", "_blank", "noopener,noreferrer"); }} className="cursor-pointer rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Facebook /></a>
+                <a href="https://www.instagram.com/orquestrasinfonicadearuja" target="_blank" rel="noopener noreferrer" aria-label="Instagram" onClick={(e) => { e.preventDefault(); window.open("https://www.instagram.com/orquestrasinfonicadearuja", "_blank", "noopener,noreferrer"); }} className="cursor-pointer rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><Instagram /></a>
+                <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" onClick={(e) => { e.preventDefault(); window.open(WHATSAPP, "_blank", "noopener,noreferrer"); }} className="cursor-pointer rounded-full bg-background/10 p-3 transition hover:bg-secondary hover:text-primary"><MessageCircle /></a>
               </div>
             </div>
           </div>
@@ -396,7 +396,8 @@ const Index = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
-        className="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-soft transition-transform hover:scale-110"
+        onClick={(e) => { e.preventDefault(); window.open(WHATSAPP, "_blank", "noopener,noreferrer"); }}
+        className="fixed bottom-6 right-6 z-[60] flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-whatsapp text-white shadow-soft transition-transform hover:scale-110"
       >
         <MessageCircle className="h-7 w-7" />
       </a>
