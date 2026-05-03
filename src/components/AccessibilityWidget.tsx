@@ -41,7 +41,7 @@ const AccessibilityWidget = () => {
     } else if (el) el.remove();
   }, [highlightLinks]);
 
-  return (
+  const ui = (
     <>
       <button
         type="button"
@@ -87,6 +87,8 @@ const AccessibilityWidget = () => {
       )}
     </>
   );
+
+  return portalRef.current ? createPortal(ui, portalRef.current) : null;
 };
 
 export default AccessibilityWidget;
