@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Accessibility, X, Plus, Minus, Palette, Link2 } from "lucide-react";
 
 const AccessibilityWidget = () => {
@@ -11,8 +12,20 @@ const AccessibilityWidget = () => {
     document.documentElement.style.fontSize = `${fontScale * 100}%`;
   }, [fontScale]);
 
+  // Container montado fora do <body> (no <html>) para não ser afetado pelo filtro de inversão
+  const portalRef = useRef<HTMLDivElement | null>(null);
+  if (!portalRef.current && typeof document !== "undefined") {
+    const div = document.createElement("div");
+    div.id = "a11y-portal";
+    document.documentElement.appendChild(div);
+    portalRef.current = div;
+  }
+  useEffect(() => () => { portalRef.current?.remove(); portalRef.current = null; }, []);
+
   useEffect(() => {
-    document.body.style.filter = invertColors ? "invert(1) hue-rotate(180deg)" : "";
+    // Aplica o filtro apenas no #root (conteúdo da página), preservando o widget no portal
+    const root = document.getElementById("root");
+    if (root) root.style.filter = invertColors ? "invert(1) hue-rotate(180deg)" : "";
   }, [invertColors]);
 
   useEffect(() => {
