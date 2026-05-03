@@ -76,14 +76,15 @@
 #music-cursor {
   position: fixed;
   top: 0; left: 0;
-  width: 28px; height: 28px;
+  width: 32px; height: 32px;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform .08s ease-out, opacity .2s;
-  color: hsl(var(--primary));
-  filter: drop-shadow(0 2px 4px hsl(var(--primary) / 0.4));
+  transition: opacity .2s;
+  color: hsl(38 95% 55%); /* amber/gold - visível em qualquer fundo/contraste */
+  filter: drop-shadow(0 0 2px hsl(220 50% 10%)) drop-shadow(0 2px 4px hsl(0 0% 0% / 0.5));
   will-change: transform;
 }
-#music-cursor.click { transform: translate(-50%, -50%) scale(1.4) rotate(-15deg); }
+#music-cursor svg { stroke: hsl(220 50% 10%); stroke-width: 1px; }
+#music-cursor.click svg { transform: scale(1.4) rotate(-15deg); transform-origin: center; }
 @media (hover: none) { #music-cursor { display: none; } }
